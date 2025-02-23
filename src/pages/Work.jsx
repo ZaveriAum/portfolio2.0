@@ -1,8 +1,10 @@
+import WorkCarousel from "../components/WorkCarousel"
+import '../styles/Work.css'
 function Work(){
     return(
-        <>
-        Work
-        </>
+        <div className="work-container">
+        <WorkCarousel/>
+        </div>
     )
 }
 

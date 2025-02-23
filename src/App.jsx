@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -8,24 +8,33 @@ const pages = [Home, About, Work];
 
 export default function Carousel() {
   const [index, setIndex] = useState(0);
-  let scrollCount = 0;
-  const scrollThreshold = 3;
+  const deltaYAccumulated = useRef(0);
+  const isScrolling = useRef(false);
+  const threshold = 300;
 
   useEffect(() => {
     const handleScroll = (event) => {
-      scrollCount += Math.sign(event.deltaY);
-      
-      if (Math.abs(scrollCount) >= scrollThreshold) {
-        if (scrollCount > 0) {
-          setIndex((prev) => (prev + 1) % pages.length);
-        } else {
-          setIndex((prev) => (prev - 1 + pages.length) % pages.length);
-        }
-        scrollCount = 0;
+      event.preventDefault();
+
+      console.log(deltaYAccumulated.current);
+      deltaYAccumulated.current += event.deltaY;
+
+      if (isScrolling.current) return;
+
+      if (Math.abs(deltaYAccumulated.current) >= threshold) {
+        const direction = deltaYAccumulated.current > 0 ? 1 : -1;
+        setIndex((prev) => (prev + direction + pages.length) % pages.length);
+
+        deltaYAccumulated.current = 0;
+        isScrolling.current = true;
+
+        setTimeout(() => {
+          isScrolling.current = false;
+        }, 500);
       }
     };
 
-    window.addEventListener("wheel", handleScroll);
+    window.addEventListener("wheel", handleScroll, { passive: false });
     return () => window.removeEventListener("wheel", handleScroll);
   }, []);
 
