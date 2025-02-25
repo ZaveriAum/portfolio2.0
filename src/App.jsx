@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Work from "./pages/Work";
-
+import Background from "./components/Background";
+import '../src/App.css'
 const pages = [Home, About, Work];
 
 export default function Carousel() {
@@ -41,19 +42,31 @@ export default function Carousel() {
   const Page = pages[index];
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={index}
-          initial={{ x: "100%" }}
-          animate={{ x: 0 }}
-          exit={{ x: "-100%" }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
-          className="absolute w-full h-full"
-        >
-          <Page />
-        </motion.div>
-      </AnimatePresence>
+    <div className="app-container">
+      <Background 
+        particleColors={['#ffffff', '#ffffff']}
+        particleCount={600}
+        particleSpread={20}
+        speed={0.05}
+        particleBaseSize={150}
+        moveParticlesOnHover={false}
+        alphaParticles={true}
+        disableRotation={false}
+      />
+      <div className="content">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={index}
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "-100%" }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+            className="absolute w-full h-full"
+          >
+            <Page />
+          </motion.div>
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
