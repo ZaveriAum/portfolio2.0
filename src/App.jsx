@@ -44,11 +44,11 @@ export default function Carousel() {
   return (
     <div className="app-container">
       <Background 
-        particleColors={['#ffffff', '#ffffff']}
+        particleColors={['#FCFFC1', '#FFE893', '#FBB4A5', '#FB9EC6']}
         particleCount={600}
         particleSpread={20}
         speed={0.05}
-        particleBaseSize={150}
+        particleBaseSize={300}
         moveParticlesOnHover={false}
         alphaParticles={true}
         disableRotation={false}

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Aldrich&family=Tomorrow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 .home-container {
     width: 100vw;
     height: 100vh;
@@ -7,12 +8,101 @@
     position: relative;
 }
 
+/* Center the Orb */
+.orb-container {
+    position: absolute;
+    width: 2100px; /* Adjust size if needed */
+    height: 2100px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; /* Below the name */
+}
+
+@keyframes gradient-text {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 .name {
     position: absolute;
-    font-size: 2rem;
-    font-weight: bold;
-    color: #333;
-    z-index: 2;
+    font-size:6rem;
+    font-weight: regular;
     text-align: center;
     pointer-events: none;
+    font-family: 'Tomorrow';
+    z-index: 2;
+    
+    background: linear-gradient(45deg, #ff00ff, #00ffff, #ff00ff);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    animation: gradient-text 3s infinite alternate ease-in-out;
+}
+
+@media (max-width: 960px) {
+/* Center the Orb */
+.orb-container {
+    width: 600px; /* Adjust size if needed */
+    height: 600px;
+}
+
+.name {
+    font-size: 3rem;
+}
+
+}
+
+@media (max-width: 750px) {
+/* Center the Orb */
+.orb-container {
+    width: 500px; /* Adjust size if needed */
+    height: 500px;
+}
+
+.name {
+    font-size: 2.5rem;
+}
+
+}
+
+@media (max-width: 500px) {
+/* Center the Orb */
+.orb-container {
+    width: 400px; /* Adjust size if needed */
+    height: 400px;
+}
+
+.name {
+    font-size: 2rem;
+}
+
+}
+
+@media (max-width: 370px) {
+/* Center the Orb */
+.orb-container {
+    width: 300px; /* Adjust size if needed */
+    height: 300px;
+}
+
+.name {
+    font-size: 1.5rem;
+}
+
+}
+
+@media (max-width: 300px) {
+/* Center the Orb */
+.orb-container {
+    width: 200px; /* Adjust size if needed */
+    height: 200px;
+}
+
+.name {
+    font-size: 1rem;
+}
+
 }
