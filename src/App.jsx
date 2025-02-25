@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Work from "./pages/Work";
+import Orb from "./components/Orb";
 import Background from "./components/Background";
 import '../src/App.css'
 const pages = [Home, About, Work];
@@ -53,6 +54,12 @@ export default function Carousel() {
         alphaParticles={true}
         disableRotation={false}
       />
+      <Orb 
+      hoverIntensity={0.1}
+      rotateOnHover={false}
+      hue={0}
+      forceHoverState={false}
+      /> 
       <div className="content">
         <AnimatePresence mode="wait">
           <motion.div
