@@ -9,7 +9,7 @@
 
 .name {
     position: absolute;
-    font-size: 4rem;
+    font-size: 5vw;
     font-weight: bold;
     text-align: center;
     pointer-events: none;
