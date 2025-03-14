@@ -15,7 +15,7 @@ function About() {
 
   return (
     <div className="about-wrapper">
-      <h2 className={`about-header ${isVisible ? 'fade-in' : ''}`}>About Me</h2>
+      <p className={`about-header ${isVisible ? 'fade-in' : ''}`}>About Me</p>
       
       <div className={`about-container ${isVisible ? 'fade-in' : ''}`}>
         <div className="about-image-container">

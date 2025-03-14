@@ -4,49 +4,135 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Work from "./pages/Work";
 import Background from "./components/Background";
-import '../src/App.css'
-import sayHiEmoji from './assets/wave-emoji.webp';
+import Exp from "./pages/Exp";
+import "../src/App.css";
+import sayHiEmoji from "./assets/wave-emoji.webp";
+import homeIcon from "./assets/home-icon.svg";
+import aboutMeIcon from "./assets/about-me-icon.svg";
+import projectsIcon from "./assets/project-icon.svg";
+import expIcon from "./assets/exp-icon.svg";
 
-const pages = [Home, About, Work];
+const pages = [
+  { component: Home, title: "Home", icon: homeIcon },
+  { component: About, title: "About", icon: aboutMeIcon },
+  { component: Work, title: "Work", icon: projectsIcon },
+  { component: Exp, title: "Exp", icon: expIcon },
+];
 
 export default function Carousel() {
   const [index, setIndex] = useState(0);
-  const deltaYAccumulated = useRef(0);
+  const carouselRef = useRef(null);
+  const lastScrollTime = useRef(0);
+  const touchStartY = useRef(0);
+  const touchEndY = useRef(0);
   const isScrolling = useRef(false);
-  const threshold = 300;
 
   useEffect(() => {
-    const handleScroll = (event) => {
+    const handleWheel = (event) => {
       event.preventDefault();
-
-      console.log(deltaYAccumulated.current);
-      deltaYAccumulated.current += event.deltaY;
-
+      
       if (isScrolling.current) return;
+      
+      const now = Date.now();
+      if (now - lastScrollTime.current < 800) return;
 
-      if (Math.abs(deltaYAccumulated.current) >= threshold) {
-        const direction = deltaYAccumulated.current > 0 ? 1 : -1;
-        setIndex((prev) => (prev + direction + pages.length) % pages.length);
+      const scrollThreshold = 50;
+      const delta = Math.abs(event.deltaY);
+      if (delta < scrollThreshold) return;
 
-        deltaYAccumulated.current = 0;
-        isScrolling.current = true;
+      const direction = event.deltaY > 0 ? 1 : -1;
+      
+      isScrolling.current = true;
+      changePage(direction);
+      lastScrollTime.current = now;
 
-        setTimeout(() => {
-          isScrolling.current = false;
-        }, 500);
+      setTimeout(() => {
+        isScrolling.current = false;
+      }, 800);
+    };
+
+    const element = carouselRef.current;
+    if (element) {
+      element.addEventListener("wheel", handleWheel, { passive: false });
+    }
+
+    return () => {
+      if (element) {
+        element.removeEventListener("wheel", handleWheel);
+      }
+    };
+  }, [index]);
+
+  useEffect(() => {
+    const element = carouselRef.current;
+
+    const handleTouchStart = (e) => {
+      touchStartY.current = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e) => {
+      e.preventDefault();
+    };
+
+    const handleTouchEnd = (e) => {
+      touchEndY.current = e.changedTouches[0].clientY;
+      const swipeDistance = touchEndY.current - touchStartY.current;
+
+      if (Math.abs(swipeDistance) > 50) {
+        const direction = swipeDistance > 0 ? -1 : 1;
+        changePage(direction);
       }
     };
 
-    window.addEventListener("wheel", handleScroll, { passive: false });
-    return () => window.removeEventListener("wheel", handleScroll);
-  }, []);
+    if (element) {
+      element.addEventListener("touchstart", handleTouchStart);
+      element.addEventListener("touchmove", handleTouchMove, { passive: false });
+      element.addEventListener("touchend", handleTouchEnd);
+    }
 
-  const Page = pages[index];
+    return () => {
+      if (element) {
+        element.removeEventListener("touchstart", handleTouchStart);
+        element.removeEventListener("touchmove", handleTouchMove);
+        element.removeEventListener("touchend", handleTouchEnd);
+      }
+    };
+  }, [index]);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      const now = Date.now();
+      if (now - lastScrollTime.current < 800) return;
+
+      if (event.key === "ArrowDown") {
+        changePage(1);
+        lastScrollTime.current = now;
+      } else if (event.key === "ArrowUp") {
+        changePage(-1);
+        lastScrollTime.current = now;
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [index]);
+
+  const changePage = (direction) => {
+    const newIndex = (index + direction + pages.length) % pages.length;
+    setIndex(newIndex);
+  };
+
+  const goToPage = (pageIndex) => {
+    if (pageIndex === index) return;
+    setIndex(pageIndex);
+  };
+
+  const CurrentPage = pages[index].component;
 
   return (
-    <div className="app-container">
-      <Background 
-        particleColors={['#FCFFC1', '#FFE893', '#FBB4A5', '#FB9EC6']}
+    <div className="app-container" ref={carouselRef}>
+      <Background
+        particleColors={["#FCFFC1", "#FFE893", "#FBB4A5", "#FB9EC6"]}
         particleCount={600}
         particleSpread={20}
         speed={0.05}
@@ -55,20 +141,35 @@ export default function Carousel() {
         alphaParticles={true}
         disableRotation={false}
       />
+
       <div className="content">
         <AnimatePresence mode="wait">
           <motion.div
             key={index}
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "-100%" }}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
             className="absolute w-full h-full"
           >
-            <Page />
+            <CurrentPage />
           </motion.div>
         </AnimatePresence>
       </div>
+
+      <div className="navigation-dots">
+        {pages.map((page, i) => (
+          <button
+            key={i}
+            className={`nav-dot ${i === index ? "active" : ""}`}
+            onClick={() => goToPage(i)}
+            aria-label={`Go to ${page.title}`}
+          >
+            <img src={page.icon} alt={page.title} className="page-icon" />
+          </button>
+        ))}
+      </div>
+
       <button className="sayhi-button">
         <img src={sayHiEmoji} alt="say-hi-icon" className="sayhi-icon" />
       </button>

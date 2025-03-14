@@ -1,9 +1,10 @@
 .app-container {
-  background-color: rgba(8, 17, 68, 0.534);;
+  background-color: rgba(8, 17, 68, 0.534);
   position: relative;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  touch-action: none;
 }
 
 .content {
@@ -20,20 +21,20 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vw;
+  width: 100%;
+  height: 100%;
   z-index: -1;
 }
 
-.sayhi-button{
+.sayhi-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  position : fixed;
+  position: fixed;
   width: 50px;
   height: 50px;
-  bottom: 50px;
-  right: 50px;
+  bottom: 20px;
+  right: 20px;
   background-color: white;
   border-radius: 100px;
   cursor: pointer;
@@ -42,9 +43,105 @@
   border: none;
 }
 
-.sayhi-icon{
+.sayhi-icon {
   width: 30px;
   height: 30px;
+}
+
+.navigation-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 80%;
+  max-width: 300px;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 20px;
+  z-index: 10;
+}
+
+.nav-dot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(to right, #130c62, #0d2889, #2912d1);
+  box-shadow: 1px 1px 10px white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-dot.active {
+  background-color: rgb(86, 33, 69);
+  transform: scale(1.2);
+}
+
+.page-icon {
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+}
+
+@media (max-width: 768px) {
+  .sayhi-button {
+    width: 40px;
+    height: 40px;
+    bottom: 15px;
+    right: 15px;
+  }
+
+  .sayhi-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .navigation-dots {
+    gap: 15px;
+  }
+
+  .nav-dot {
+    width: 35px;
+    height: 35px;
+  }
+
+  .page-icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sayhi-button {
+    width: 35px;
+    height: 35px;
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .sayhi-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .navigation-dots {
+    gap: 10px;
+    max-width: 200px;
+  }
+
+  .nav-dot {
+    width: 30px;
+    height: 30px;
+  }
+
+  .page-icon {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 @keyframes gradient-text {
