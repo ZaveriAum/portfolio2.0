@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Aldrich&family=Tomorrow:wght@300;400;600;700&display=swap');
+
 .home-container {
     width: 100vw;
     height: 100vh;
@@ -9,12 +11,12 @@
 
 .name {
     position: absolute;
-    font-size: 5vw;
+    font-size: 80px;
     font-weight: bold;
     text-align: center;
     pointer-events: none;
     z-index: 2;
-    
+    font-family: 'Aldrich';
     background: linear-gradient(45deg, #ff00ff, #00ffff, #ff00ff);
     background-size: 400% 400%;
     -webkit-background-clip: text;

@@ -3,9 +3,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Work from "./pages/Work";
-import Orb from "./components/Orb";
 import Background from "./components/Background";
 import '../src/App.css'
+import sayHiEmoji from './assets/wave-emoji.webp';
+
 const pages = [Home, About, Work];
 
 export default function Carousel() {
@@ -54,12 +55,6 @@ export default function Carousel() {
         alphaParticles={true}
         disableRotation={false}
       />
-      <Orb 
-      hoverIntensity={0.1}
-      rotateOnHover={false}
-      hue={0}
-      forceHoverState={false}
-      /> 
       <div className="content">
         <AnimatePresence mode="wait">
           <motion.div
@@ -74,6 +69,9 @@ export default function Carousel() {
           </motion.div>
         </AnimatePresence>
       </div>
+      <button className="sayhi-button">
+        <img src={sayHiEmoji} alt="say-hi-icon" className="sayhi-icon" />
+      </button>
     </div>
   );
 }

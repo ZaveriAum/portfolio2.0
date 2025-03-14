@@ -25,14 +25,26 @@
   z-index: -1;
 }
 
-.orb-container {
-  position: absolute;
-  width: 130vw;
-  height: 130vw;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
+.sayhi-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position : fixed;
+  width: 50px;
+  height: 50px;
+  bottom: 50px;
+  right: 50px;
+  background-color: white;
+  border-radius: 100px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 1px 1px 5px white;
+  border: none;
+}
+
+.sayhi-icon{
+  width: 30px;
+  height: 30px;
 }
 
 @keyframes gradient-text {
