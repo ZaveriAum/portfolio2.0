@@ -11,6 +11,9 @@ import homeIcon from "./assets/home-icon.svg";
 import aboutMeIcon from "./assets/about-me-icon.svg";
 import projectsIcon from "./assets/project-icon.svg";
 import expIcon from "./assets/exp-icon.svg";
+import sendIcon from './assets/send-icon.svg';
+import closeIcon from './assets/close-icon.svg';
+import emailjs from '@emailjs/browser';
 
 const pages = [
   { component: Home, title: "Home", icon: homeIcon },
@@ -26,6 +29,10 @@ export default function Carousel() {
   const touchStartY = useRef(0);
   const touchEndY = useRef(0);
   const isScrolling = useRef(false);
+  const [sayHiModal, setSayHiModal] = useState(false);
+  const [message, setMessage] = useState('');
+  const [isSending, setIsSending] = useState(false);
+  const [sendStatus, setSendStatus] = useState(null);
 
   useEffect(() => {
     const handleWheel = (event) => {
@@ -99,6 +106,39 @@ export default function Carousel() {
     };
   }, [index]);
 
+  const sendEmail = (e) => {
+    e.preventDefault();
+    
+    setIsSending(true);
+    
+    const serviceId = 'service_i9v6v6q';
+    const templateId = 'template_2bp6j5p';
+    const publicKey = 's3glYWQQWNlzZ9uw2';
+    
+    const templateParams = {
+      message: message,
+      to_email: 'your@email.com',
+      from_name: 'Website Visitor'
+    };
+  
+    emailjs.send(serviceId, templateId, templateParams, publicKey)
+      .then((response) => {
+        setSendStatus('success');
+        setMessage('');
+        setTimeout(() => {
+          setSayHiModal(false);
+          setSendStatus(null);
+        }, 1500);
+      })
+      .catch((error) => {
+        setSendStatus('error');
+        console.error('Email failed to send:', error);
+      })
+      .finally(() => {
+        setIsSending(false);
+      });
+  };
+
   useEffect(() => {
     const handleKeyDown = (event) => {
       const now = Date.now();
@@ -170,9 +210,77 @@ export default function Carousel() {
         ))}
       </div>
 
-      <button className="sayhi-button">
-        <img src={sayHiEmoji} alt="say-hi-icon" className="sayhi-icon" />
-      </button>
+      {
+        !sayHiModal ? (
+          <motion.button 
+            className="sayhi-button"
+            onClick={() => setSayHiModal(true)}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <img src={sayHiEmoji} alt="say-hi-icon" className="sayhi-icon" />
+          </motion.button>
+        ) : (
+          <motion.div 
+            className="sayhi-container"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            <div className="sayhi-header">
+              <p>Say Hi! 👋</p>
+              <motion.button 
+                onClick={() => setSayHiModal(false)}
+                className="sayhi-modal-button close-btn"
+              >
+                <img src={closeIcon} alt="close-icon" className="sayhi-close-icon"/>
+              </motion.button>
+            </div>
+            <form onSubmit={sendEmail} className="sayhi-form">
+              <textarea 
+                placeholder="Type your message..."
+                className="say-hi-input"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                disabled={isSending}
+              />
+              <motion.button 
+                type="submit"
+                className="sayhi-modal-button send-btn"
+                disabled={isSending || !message.trim()}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {isSending ? (
+                  <span className="sending-dots">...</span>
+                ) : (
+                  <img src={sendIcon} alt="sendIcon" className="sayhi-send-icon"/>
+                )}
+              </motion.button>
+            </form>
+            {sendStatus === 'success' && (
+              <motion.div 
+                className="success-message"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+              >
+                Message sent successfully!
+              </motion.div>
+            )}
+            {sendStatus === 'error' && (
+              <motion.div 
+                className="error-message"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+              >
+                Failed to send message
+              </motion.div>
+            )}
+          </motion.div>
+        )
+      }
+
     </div>
   );
 }

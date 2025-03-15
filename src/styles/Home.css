@@ -21,6 +21,5 @@
     background-size: 400% 400%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    
     animation: gradient-text 3s infinite alternate ease-in-out;
 }
