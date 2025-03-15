@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Aldrich&family=Tomorrow:wght@300;400;600;700&display=swap');
+
+.exp-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.exp-header {
+  text-align: center;
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 600;
+  padding-bottom: 15px;
+  margin: 0;
+  color: white;
+  font-family: 'Aldrich', sans-serif;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.exp-container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+  background: transparent;
+  border-radius: 10px;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.exp-box {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
+.exp-middle {
+  padding: 10px;
+}
+
+.exp-text {
+  position: relative;
+}
+
+.exp-content {
+  text-align: left;
+}
+
+.exp-title {
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 600;
+  color: white;
+  margin: 0 0 5px 0; 
+  font-family: 'Aldrich', sans-serif;
+}
+
+.exp-company {
+  font-size: clamp(14px, 2vw, 18px);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 5px 0; 
+  font-family: 'Tomorrow', sans-serif;
+}
+
+.exp-details {
+  font-size: clamp(12px, 1.8vw, 16px); 
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 5px 0;
+  font-family: 'Tomorrow', sans-serif;
+}
+
+.exp-duration {
+  font-size: clamp(12px, 1.8vw, 16px);
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  font-family: 'Tomorrow', sans-serif;
+  font-style: italic;
+}
+
+.exp-details-list {
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+}
+
+.exp-details-list li {
+  font-size: clamp(12px, 1.8vw, 14px);
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 8px;
+  font-family: 'Tomorrow', sans-serif;
+  display: flex;
+  align-items: flex-start;
+}
+
+.bullet {
+  font-weight: bolder;
+  font-size: 1.1em;
+  color: #00ddeb;
+  margin-right: 8px;
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.row {
+  display: flex;
+  width: 100%;
+}
+
+.col-lg-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.col-sm-12 {
+  flex: 100%;
+  max-width: 100%;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 992px) {
+  .exp-container {
+    width: 95%;
+  }
+
+  .col-lg-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .exp-border-left,
+  .exp-border-right {
+    border: none;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .exp-box {
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .exp-title {
+    font-size: clamp(14px, 2vw, 18px);
+  }
+
+  .exp-company {
+    font-size: clamp(12px, 1.8vw, 16px);
+  }
+}
+
+@media (max-width: 480px) {
+  .exp-header {
+    font-size: clamp(20px, 3.5vw, 30px);
+    padding-bottom: 10px;
+  }
+
+  .exp-title {
+    font-size: 14px; 
+  }
+
+  .exp-company,
+  .exp-details,
+  .exp-duration,
+  .exp-details-list li {
+    font-size: 12px;
+  }
+
+  .exp-box {
+    margin-bottom: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

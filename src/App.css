@@ -170,7 +170,7 @@
   justify-content: center;
   align-items: center;
   position: fixed;
-  width: clamp(150px, 80%, 300px);
+  width: clamp(150px, 80%, 500px);
   bottom: clamp(10px, 2vw, 20px);
   left: 50%;
   transform: translateX(-50%);
