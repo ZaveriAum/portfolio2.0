@@ -169,10 +169,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   position: fixed;
   width: clamp(150px, 80%, 500px);
-  bottom: clamp(10px, 2vw, 20px);
-  left: 50%;
+  left: 50px;
+  bottom: 30%;
   transform: translateX(-50%);
   gap: clamp(10px, 3vw, 50px);
   z-index: 10;
@@ -188,7 +189,7 @@
   height: clamp(30px, 6vw, 40px);
   border-radius: 50%;
   background: linear-gradient(to right, #130c62, #0d2889, #2912d1);
-  box-shadow: 1px 1px 10px white;
+  box-shadow: 0.5px 0.5px 4px white;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;

@@ -25,7 +25,20 @@
     margin: 0;
     color: white;
     font-family: 'Aldrich', sans-serif;
+    margin-bottom: 30px;
 }
+
+.about-header:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(45deg, #00ddeb, #8a2be2);
+    border-radius: 2px;
+  }
 
 .about-image-container {
     flex: 1;

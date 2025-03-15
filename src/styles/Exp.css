@@ -16,6 +16,19 @@
   color: white;
   font-family: 'Aldrich', sans-serif;
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  margin-bottom: 30px;
+}
+
+.exp-header:after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(45deg, #00ddeb, #8a2be2);
+  border-radius: 2px;
 }
 
 .exp-container {
