@@ -31,10 +31,10 @@
   align-items: center;
   justify-content: center;
   position: fixed;
-  width: 60px;
-  height: 60px;
-  bottom: 30px;
-  right: 30px;
+  width: clamp(35px, 8vw, 60px);
+  height: clamp(35px, 8vw, 60px);
+  bottom: clamp(10px, 3vw, 30px);
+  right: clamp(10px, 3vw, 30px);
   background: linear-gradient(45deg, #00ddeb, #8a2be2);
   border-radius: 50%;
   cursor: pointer;
@@ -49,17 +49,17 @@
 }
 
 .sayhi-icon {
-  width: 35px;
-  height: 35px;
+  width: clamp(20px, 4vw, 35px);
+  height: clamp(20px, 4vw, 35px);
   animation: wave 2s infinite;
 }
 
 .sayhi-container {
   position: fixed;
-  width: 280px;
-  padding: 15px;
-  bottom: 30px;
-  right: 30px;
+  width: clamp(200px, 70vw, 280px);
+  padding: clamp(10px, 2vw, 15px);
+  bottom: clamp(10px, 3vw, 30px);
+  right: clamp(10px, 3vw, 30px);
   background: linear-gradient(135deg, rgba(0, 221, 235, 0.95), rgba(138, 43, 226, 0.95));
   border-radius: 15px;
   z-index: 1001;
@@ -68,15 +68,15 @@
 }
 
 .sayhi-close-icon, .sayhi-send-icon {
-  width: 20px;
-  height: 20px;
+  width: clamp(16px, 2.5vw, 20px);
+  height: clamp(16px, 2.5vw, 20px);
   filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.7));
 }
 
 .sayhi-modal-button {
   background: rgba(255, 255, 255, 0.1);
-  width: 30px;
-  height: 30px;
+  width: clamp(25px, 4vw, 30px);
+  height: clamp(25px, 4vw, 30px);
   border-radius: 50%;
   border: none;
   cursor: pointer;
@@ -90,38 +90,34 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
-.sayhi-send-icon{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .sayhi-header {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: clamp(5px, 1.5vw, 10px);
 }
 
 .sayhi-header p {
   font-family: 'Aldrich', sans-serif;
   color: white;
-  font-size: 18px;
+  font-size: clamp(14px, 3vw, 18px);
   margin: 0;
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
 .sayhi-form {
   display: flex;
-  gap: 10px;
+  gap: clamp(5px, 1.5vw, 10px);
   align-items: flex-end;
+  flex-direction: row;
 }
 
 .say-hi-input {
-  width: 80%;
-  height: 80px;
-  padding: 10px;
+  width: 100%;
+  flex: 1;
+  height: clamp(60px, 15vw, 80px);
+  padding: clamp(5px, 1.5vw, 10px);
   border: none;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.1);
@@ -129,6 +125,7 @@
   resize: none;
   font-family: 'Aldrich', sans-serif;
   transition: all 0.3s ease;
+  font-size: clamp(12px, 2.5vw, 16px);
 }
 
 .say-hi-input:focus {
@@ -148,7 +145,7 @@
   transform: translateX(-50%);
   padding: 5px 15px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: clamp(10px, 2vw, 12px);
   font-family: 'Aldrich', sans-serif;
 }
 
@@ -164,20 +161,8 @@
 
 .sending-dots {
   color: white;
-  font-size: 20px;
+  font-size: clamp(16px, 3vw, 20px);
   animation: dots 1.5s infinite;
-}
-
-@keyframes wave {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(20deg); }
-  75% { transform: rotate(-20deg); }
-}
-
-@keyframes dots {
-  0% { opacity: 0.2; }
-  50% { opacity: 1; }
-  100% { opacity: 0.2; }
 }
 
 .navigation-dots {
@@ -185,21 +170,22 @@
   justify-content: center;
   align-items: center;
   position: fixed;
-  width: 80%;
-  max-width: 300px;
-  bottom: 20px;
+  width: clamp(150px, 80%, 300px);
+  bottom: clamp(10px, 2vw, 20px);
   left: 50%;
   transform: translateX(-50%);
-  gap: 50px;
+  gap: clamp(10px, 3vw, 50px);
   z-index: 10;
+  flex-wrap: wrap;
+  padding: 0 10px;
 }
 
 .nav-dot {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
+  width: clamp(30px, 6vw, 40px);
+  height: clamp(30px, 6vw, 40px);
   border-radius: 50%;
   background: linear-gradient(to right, #130c62, #0d2889, #2912d1);
   box-shadow: 1px 1px 10px white;
@@ -216,71 +202,56 @@
   -webkit-text-fill-color: transparent;
   box-shadow: none;
   animation: gradient-text 3s infinite alternate ease-in-out;
-  width: 45px;
-  height: 45px;
+  width: clamp(35px, 7vw, 45px);
+  height: clamp(35px, 7vw, 45px);
 }
 
 .page-icon {
-  width: 20px;
-  height: 20px;
+  width: clamp(16px, 3vw, 20px);
+  height: clamp(16px, 3vw, 20px);
   background-color: transparent;
 }
 
 @media (max-width: 768px) {
-  .sayhi-button {
-    width: 40px;
-    height: 40px;
-    bottom: 15px;
-    right: 15px;
+  .sayhi-container {
+    width: clamp(180px, 90vw, 280px);
   }
 
-  .sayhi-icon {
-    width: 24px;
-    height: 24px;
+  .sayhi-form {
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .navigation-dots {
-    gap: 15px;
+  .say-hi-input {
+    width: 100%;
   }
 
-  .nav-dot {
-    width: 35px;
-    height: 35px;
-  }
-
-  .page-icon {
-    width: 18px;
-    height: 18px;
+  .sayhi-modal-button.send-btn {
+    align-self: flex-end;
   }
 }
 
 @media (max-width: 480px) {
-  .sayhi-button {
-    width: 35px;
-    height: 35px;
-    bottom: 10px;
-    right: 10px;
-  }
-
-  .sayhi-icon {
-    width: 20px;
-    height: 20px;
+  .sayhi-header p {
+    font-size: clamp(12px, 4vw, 16px);
   }
 
   .navigation-dots {
-    gap: 20px;
-    max-width: 200px;
+    width: clamp(120px, 90%, 200px);
+    gap: clamp(8px, 2vw, 20px);
   }
+}
 
-  .nav-dot {
-    width: 30px;
-    height: 30px;
-  }
+@keyframes wave {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(20deg); }
+  75% { transform: rotate(-20deg); }
+}
 
-  .page-icon {
-    width: 16px;
-    height: 16px;
-  }
+@keyframes dots {
+  0% { opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { opacity: 0.2; }
 }
 
 @keyframes gradient-text {
