@@ -34,6 +34,17 @@ function About() {
                 My journey started with a love for problem-solving and system design, leading me to build microservices, optimize databases, and implement CI/CD workflows.  
                 I’ve worked on projects like SportTrackr and Flashify, ensuring seamless user experiences and real-time interactions.  
                 I believe in clean code, continuous learning, and turning ideas into reality through technology.  
+                <div className="modal-links">
+                  <a href="https://drive.google.com/file/d/1ACeVfG4uflAqXzTJG63q44E-H5nMX9TJ/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+                    Resume
+                  </a>
+                  <a href="https://drive.google.com/file/d/15x2v13DcsAMyx6aBmnyWOJ4X6dd-Q8SU/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+                    Cover Letter
+                  </a>
+                  <a href="https://drive.google.com/file/d/1xxzuTwIb8BcnCchJHlBffedBuajwHK4C/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+                    Recommendation Letter
+                  </a>
+                </div>
             </p>
         </div>
       </div>

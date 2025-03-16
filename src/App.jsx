@@ -116,10 +116,9 @@ export default function Carousel() {
     const publicKey = 's3glYWQQWNlzZ9uw2';
     
     const templateParams = {
-      message: message,
-      to_email: 'your@email.com',
-      from_name: 'Website Visitor'
+      message: message, 
     };
+    
   
     emailjs.send(serviceId, templateId, templateParams, publicKey)
       .then((response) => {
