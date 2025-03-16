@@ -18,8 +18,8 @@ import emailjs from '@emailjs/browser';
 const pages = [
   { component: Home, title: "Home", icon: homeIcon },
   { component: About, title: "About", icon: aboutMeIcon },
-  { component: Work, title: "Work", icon: projectsIcon },
-  { component: Exp, title: "Exp", icon: expIcon },
+  { component: Work, title: "Projects", icon: projectsIcon },
+  { component: Exp, title: "Experience", icon: expIcon },
 ];
 
 export default function Carousel() {
@@ -206,6 +206,7 @@ export default function Carousel() {
             aria-label={`Go to ${page.title}`}
           >
             <img src={page.icon} alt={page.title} className="page-icon" />
+            <span className="tooltip">{page.title}</span>
           </button>
         ))}
       </div>
@@ -219,6 +220,7 @@ export default function Carousel() {
             whileTap={{ scale: 0.95 }}
           >
             <img src={sayHiEmoji} alt="say-hi-icon" className="sayhi-icon" />
+            <span className="tooltip">Say Hi!</span>
           </motion.button>
         ) : (
           <motion.div 
