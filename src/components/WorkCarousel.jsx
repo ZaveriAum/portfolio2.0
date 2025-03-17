@@ -4,7 +4,7 @@ import SportMob from '../assets/projects-thumbnail/sporttrackr-mob.png';
 import SportWeb from '../assets/projects-thumbnail/sporttrackr-web.png';
 import FlashifyThumb from '../assets/projects-thumbnail/flashify.webp';
 import FlashifyWeb from '../assets/projects-thumbnail/flashify-web.png';
-import NorthPoleWeb from '../assets/projects-thumbnail/NorthPole-web.png';
+import NorthPoleWeb from '../assets/projects-thumbnail/Northpole-web.png';
 import TicTacToe from '../assets/projects-thumbnail/tic-tac-toe.png';
 
 import '../styles/components/WorkCarousel.css';
