@@ -14,6 +14,7 @@ import expIcon from "./assets/exp-icon.svg";
 import sendIcon from './assets/send-icon.svg';
 import closeIcon from './assets/close-icon.svg';
 import emailjs from '@emailjs/browser';
+import menuIcon from './assets/menu-icon.svg';
 
 const pages = [
   { component: Home, title: "Home", icon: homeIcon },
@@ -33,6 +34,8 @@ export default function Carousel() {
   const [message, setMessage] = useState('');
   const [isSending, setIsSending] = useState(false);
   const [sendStatus, setSendStatus] = useState(null);
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     const handleWheel = (event) => {
@@ -106,6 +109,14 @@ export default function Carousel() {
     };
   }, [index]);
 
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const toggleNav = () => setIsNavOpen((prev) => !prev);
+
   const sendEmail = (e) => {
     e.preventDefault();
     
@@ -162,8 +173,8 @@ export default function Carousel() {
   };
 
   const goToPage = (pageIndex) => {
-    if (pageIndex === index) return;
     setIndex(pageIndex);
+    setIsNavOpen(false);
   };
 
   const CurrentPage = pages[index].component;
@@ -196,19 +207,39 @@ export default function Carousel() {
         </AnimatePresence>
       </div>
 
-      <div className="navigation-dots">
-        {pages.map((page, i) => (
-          <button
-            key={i}
-            className={`nav-dot ${i === index ? "active" : ""}`}
-            onClick={() => goToPage(i)}
-            aria-label={`Go to ${page.title}`}
+      {windowWidth <= 1225 && (
+        <motion.button
+          className="nav-toggle"
+          onClick={toggleNav}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <img src={isNavOpen ? closeIcon : menuIcon} alt="menu-icon" />
+        </motion.button>
+      )}
+
+      <AnimatePresence>
+        {(isNavOpen || windowWidth > 1225) && (
+          <motion.div
+            className="navigation-dots"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3 }}
           >
-            <img src={page.icon} alt={page.title} className="page-icon" />
-            <span className="tooltip">{page.title}</span>
-          </button>
-        ))}
-      </div>
+            {pages.map((page, i) => (
+              <button
+                key={i}
+                className={`nav-dot ${i === index ? "active" : ""}`}
+                onClick={() => goToPage(i)}
+              >
+                <img src={page.icon} alt={page.title} className="page-icon" />
+                <span className="tooltip">{page.title}</span>
+              </button>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {
         !sayHiModal ? (

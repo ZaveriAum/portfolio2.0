@@ -171,7 +171,6 @@
   align-items: center;
   flex-direction: column;
   position: fixed;
-  width: clamp(150px, 80%, 500px);
   left: 50px;
   bottom: 30%;
   transform: translateX(-50%);
@@ -194,6 +193,29 @@
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+.nav-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(45deg, #00ddeb, #8a2be2);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+}
+
+.nav-toggle img {
+  width: 30px;
+  height: 30px;
+  /* filter: invert(1); */
 }
 
 .tooltip {
@@ -240,6 +262,15 @@
   background-color: transparent;
 }
 
+@media (max-width: 1225px) {
+  .navigation-dots {
+    position: absolute;
+    top: 100px;
+    left : 10px;
+    bottom: 0%;
+  }
+}
+
 @media (max-width: 768px) {
   .sayhi-container {
     width: clamp(180px, 90vw, 280px);
@@ -265,7 +296,6 @@
   }
 
   .navigation-dots {
-    width: clamp(120px, 90%, 200px);
     gap: clamp(8px, 2vw, 20px);
   }
 }
