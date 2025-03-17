@@ -28,6 +28,9 @@
 }
 
 .project-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   border-radius: 15px;
   overflow: hidden;
@@ -57,9 +60,9 @@
 }
 
 .single-img {
-  width: 500px;
+  width: 600px;
   height: 300px;
-  object-fit: cover;
+  align-self: center;
 }
 
 .project-images:hover .web-img {
@@ -82,7 +85,7 @@
   font-family: 'Tomorrow', sans-serif;
   font-size: clamp(14px, 1.5vw, 18px);
   color: rgba(255, 255, 255, 0.9);
-  max-width: 80%;
+  max-width: 110%;
   margin: 0 auto;
   text-align: center;
 }

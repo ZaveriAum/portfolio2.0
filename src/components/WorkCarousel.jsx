@@ -4,8 +4,8 @@ import SportMob from '../assets/projects-thumbnail/sporttrackr-mob.png';
 import SportWeb from '../assets/projects-thumbnail/sporttrackr-web.png';
 import FlashifyThumb from '../assets/projects-thumbnail/flashify.webp';
 import FlashifyWeb from '../assets/projects-thumbnail/flashify-web.png';
+import NorthPoleWeb from '../assets/projects-thumbnail/NorthPole-web.png';
 import '../styles/components/WorkCarousel.css';
-
 const WorkCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -154,6 +154,24 @@ const WorkCarousel = () => {
           wireframe: "https://www.figma.com/design/8SE0wiwKfeQj0d1FjGmano/Flashify?node-id=0-1&t=pkgs6KfwtzIsDg1A-1"
         }
       }
+    },
+    {
+      id: 3,
+      title: "North Pole",
+      description: "NorthPole Booking is a comprehensive full-stack ASP.NET Core application designed to streamline the booking experience for flights, cars, and hotels (including rooms). This platform integrates powerful technologies such as LINQ, Entity Framework Core, and Identity Management.",
+      webImage: NorthPoleWeb,
+      hasMobile: false,
+      details: {
+        techStack: ["ASP.NET MVC Core", "Microsoft Entity Framework Core", "Microsoft SQL", "SendGrid API","Bootstrap"],
+        features: ["Seamless Booking System for Flight, Car and Hotel", "User Authentication", "Role Management", "Email Notifications", "User Reviews & Ratings", "Admin Dashboard"],
+        github: [
+          "https://github.com/ZaveriAum/COMP2139-Assignment1",
+        ],
+        liveDemo: null,
+        additionalInfo: {
+          wireframe: null
+        }
+      }
     }
   ];  
 
@@ -264,11 +282,17 @@ const WorkCarousel = () => {
       </div>
 
       <div className="modal-links">
-        {projects[currentIndex].details.github.map((link, i) => (
-          <a key={i} href={link} target="_blank" rel="noopener noreferrer">
-            {i === 0 ? "Backend" : i === 1 ? "Frontend" : "Mobile"}
+        {projects[currentIndex].details.github.length === 1 ? (
+          <a href={projects[currentIndex].details.github[0]} target="_blank" rel="noopener noreferrer">
+            GitHub
           </a>
-        ))}
+        ) : (
+          projects[currentIndex].details.github.map((link, i) => (
+            <a key={i} href={link} target="_blank" rel="noopener noreferrer">
+              {i === 0 ? "Backend" : i === 1 ? "Frontend" : "Mobile"}
+            </a>
+          ))
+        )}
         {projects[currentIndex].details.additionalInfo.wireframe && (
           <a href={projects[currentIndex].details.additionalInfo.wireframe} target="_blank" rel="noopener noreferrer">Wireframes</a>
         )}
