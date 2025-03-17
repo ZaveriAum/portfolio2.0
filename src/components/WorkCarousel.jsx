@@ -5,6 +5,8 @@ import SportWeb from '../assets/projects-thumbnail/sporttrackr-web.png';
 import FlashifyThumb from '../assets/projects-thumbnail/flashify.webp';
 import FlashifyWeb from '../assets/projects-thumbnail/flashify-web.png';
 import NorthPoleWeb from '../assets/projects-thumbnail/NorthPole-web.png';
+import TicTacToe from '../assets/projects-thumbnail/tic-tac-toe.png';
+
 import '../styles/components/WorkCarousel.css';
 const WorkCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -172,7 +174,30 @@ const WorkCarousel = () => {
           wireframe: null
         }
       }
-    }
+    },{
+      id: 4,
+      title: "Tic Tac Toe AI",
+      description: "Tic Tac Toe AI is an advanced JavaFX-based desktop game featuring an intelligent AI opponent powered by the Minimax algorithm. The application provides an interactive and visually appealing GUI for a seamless gaming experience.",
+      webImage: TicTacToe,
+      hasMobile: false,
+      details: {
+        techStack: ["JavaFX", "Minimax Algorithm", "FXML", "Scene Builder"],
+        features: [
+          "Single-Player Mode with AI Opponent",
+          "Minimax Algorithm for Optimal AI Decisions",
+          "Interactive JavaFX GUI",
+          "Smooth Animations & UI Effects",
+          "Multiplayer (Local) Mode"
+        ],
+        github: [
+          "https://github.com/ZaveriAum/TicTacToe-minimax_AI-two_player"
+        ],
+        liveDemo: null,
+        additionalInfo: {
+          wireframe: null
+        }
+      }
+    }    
   ];  
 
   useEffect(() => {

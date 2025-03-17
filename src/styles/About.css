@@ -9,7 +9,7 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 30px;
-    background: transparent;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
     border: 3px solid rgba(255, 255, 255, 0.2);
     border-radius: 15px;
     padding: 30px 20px;
