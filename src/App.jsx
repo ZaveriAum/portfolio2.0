@@ -16,7 +16,6 @@ import closeIcon from './assets/close-icon.svg';
 import emailjs from '@emailjs/browser';
 import menuIcon from './assets/menu-icon.svg';
 import githubIcon from './assets/github-icon.svg';
-import { title } from "framer-motion/client";
 import linkedinIcon from './assets/linkedin-icon.svg';
 
 const pages = [
@@ -30,6 +29,7 @@ const pages = [
 
 export default function Carousel() {
   const [index, setIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const carouselRef = useRef(null);
   const lastScrollTime = useRef(0);
   const touchStartY = useRef(0);
@@ -44,6 +44,7 @@ export default function Carousel() {
 
   useEffect(() => {
     const handleWheel = (event) => {
+      if (isModalOpen) return;
       event.preventDefault();
       
       if (isScrolling.current) return;
@@ -76,7 +77,7 @@ export default function Carousel() {
         element.removeEventListener("wheel", handleWheel);
       }
     };
-  }, [index]);
+  }, [index, isModalOpen]);
 
   useEffect(() => {
     const element = carouselRef.current;
@@ -112,7 +113,7 @@ export default function Carousel() {
         element.removeEventListener("touchend", handleTouchEnd);
       }
     };
-  }, [index]);
+  }, [index, isModalOpen]);
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -170,7 +171,7 @@ export default function Carousel() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [index]);
+  }, [index, isModalOpen]);
 
   const changePage = (direction) => {
     const newIndex = (index + direction + pages.length) % pages.length;
@@ -215,7 +216,7 @@ export default function Carousel() {
             exit={{ opacity: 0, y: -50 }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
           >
-            <CurrentPage />
+            <CurrentPage isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
           </motion.div>
         </AnimatePresence>
       </div>

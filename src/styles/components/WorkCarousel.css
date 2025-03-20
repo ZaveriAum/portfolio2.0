@@ -1,7 +1,7 @@
 .work-carousel-container {
   position: relative;
   width: 100%;
-  max-width: 1200px;
+  max-width: clamp(300px, 90vw, 1200px);
   margin: 0 auto;
 }
 
@@ -14,14 +14,14 @@
 
 .carousel-content {
   width: 100%;
-  max-width: 900px;
+  max-width: clamp(280px, 85vw, 900px);
   perspective: 1000px;
 }
 
 .project-card {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
   border-radius: 20px;
-  padding: 30px;
+  padding: clamp(15px, 3vw, 30px);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -42,11 +42,13 @@
   gap: 20px;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .web-img, .mobile-img, .single-img {
   border-radius: 10px;
   transition: transform 0.3s ease;
+  object-fit: cover;
 }
 
 .web-img {
@@ -118,6 +120,7 @@
   justify-content: center;
   gap: 10px;
   margin-top: 20px;
+  flex-wrap: wrap;
 }
 
 .dot {
@@ -146,19 +149,19 @@
   justify-content: center;
   align-items: center;
   z-index: 5000;
-  overflow: hidden; /* Prevents scrolling outside the modal */
+  overflow: hidden;
 }
 
 .modal-content {
   background: linear-gradient(135deg, rgba(0, 221, 235, 0.95), rgba(138, 43, 226, 0.95));
-  padding: 30px;
-  width: 90%;
-  max-width: 800px;
-  max-height: 80vh;
+  padding: clamp(15px, 3vw, 30px);
+  width: clamp(280px, 90vw, 800px);
+  max-height: 85vh;
   overflow-y: auto;
   position: relative;
   color: white;
   font-family: 'Tomorrow', sans-serif;
+  box-shadow: 0 0 20px rgba(0, 221, 235, 0.5);
 }
 
 .modal-content::-webkit-scrollbar {
@@ -262,5 +265,9 @@
   .dual-images {
     flex-direction: column;
     gap: 10px;
+  }
+
+  .modal-content {
+    max-height: 80vh;
   }
 }

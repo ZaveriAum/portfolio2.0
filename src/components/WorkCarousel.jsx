@@ -8,9 +8,8 @@ import NorthPoleWeb from '../assets/projects-thumbnail/Northpole-web.png';
 import TicTacToe from '../assets/projects-thumbnail/tic-tac-toe.png';
 
 import '../styles/components/WorkCarousel.css';
-const WorkCarousel = () => {
+const WorkCarousel = ({ isModalOpen, setIsModalOpen }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [direction, setDirection] = useState(0);
 
   const projects = [
@@ -241,7 +240,6 @@ const WorkCarousel = () => {
   return (
     <div className="work-carousel-container">
       <div className="carousel-wrapper">
-
         <div className="carousel-content">
           <AnimatePresence initial={false} custom={direction}>
             <motion.div
@@ -282,141 +280,140 @@ const WorkCarousel = () => {
           <motion.button
             key={idx}
             className={`dot ${idx === currentIndex ? 'active' : ''}`}
-            onClick={() => {
-              setDirection(idx > currentIndex ? 1 : -1);
-              setCurrentIndex(idx);
-            }}
+            onClick={() => handleDotClick(idx)}
             whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
           />
         ))}
       </div>
 
       <AnimatePresence>
-      {isModalOpen && (
-  <motion.div
-    className="project-modal"
-    initial={{ opacity: 0, scale: 0.8 }}
-    animate={{ opacity: 1, scale: 1 }}
-    exit={{ opacity: 0, scale: 0.8 }}
-    transition={{ duration: 0.3 }}
-  >
-    <div className="modal-content">
-      <div className="project-modal-header">
-        <h2>{projects[currentIndex].title}</h2>
-        <button className="modal-close" onClick={closeModal}>×</button>
-      </div>
+        {isModalOpen && (
+          <motion.div
+            className="project-modal"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.3 }}
+            onClick={(e) => e.target.className === "project-modal" && closeModal()} // Close on backdrop click
+          >
+            <div className="modal-content">
+              <div className="project-modal-header">
+                <h2>{projects[currentIndex].title}</h2>
+                <button className="modal-close" onClick={closeModal}>×</button>
+              </div>
 
-      <div className="modal-links">
-        {projects[currentIndex].details.github.length === 1 ? (
-          <a href={projects[currentIndex].details.github[0]} target="_blank" rel="noopener noreferrer">
-            GitHub
-          </a>
-        ) : (
-          projects[currentIndex].details.github.map((link, i) => (
-            <a key={i} href={link} target="_blank" rel="noopener noreferrer">
-              {i === 0 ? "Backend" : i === 1 ? "Frontend" : "Mobile"}
-            </a>
-          ))
-        )}
-        {projects[currentIndex].details.additionalInfo.wireframe && (
-          <a href={projects[currentIndex].details.additionalInfo.wireframe} target="_blank" rel="noopener noreferrer">Wireframes</a>
-        )}
-        {projects[currentIndex].details.liveDemo && (
-          <a href={projects[currentIndex].details.liveDemo} target="_blank" rel="noopener noreferrer">Live Demo</a>
-        )}
-      </div>
-      <p>{projects[currentIndex].description}</p>
+              <div className="modal-links">
+                {projects[currentIndex].details.github.length === 1 ? (
+                  <a href={projects[currentIndex].details.github[0]} target="_blank" rel="noopener noreferrer">
+                    GitHub
+                  </a>
+                ) : (
+                  projects[currentIndex].details.github.map((link, i) => (
+                    <a key={i} href={link} target="_blank" rel="noopener noreferrer">
+                      {i === 0 ? "Backend" : i === 1 ? "Frontend" : "Mobile"}
+                    </a>
+                  ))
+                )}
+                {projects[currentIndex].details.additionalInfo.wireframe && (
+                  <a href={projects[currentIndex].details.additionalInfo.wireframe} target="_blank" rel="noopener noreferrer">Wireframes</a>
+                )}
+                {projects[currentIndex].details.liveDemo && (
+                  <a href={projects[currentIndex].details.liveDemo} target="_blank" rel="noopener noreferrer">Live Demo</a>
+                )}
+              </div>
+              <p>{projects[currentIndex].description}</p>
 
-      <div className="modal-details">
-        <h3>Tech Stack</h3>
-        <ul>
-          {projects[currentIndex].details.techStack.map((tech, i) => (
-            <li key={i}>{tech}</li>
-          ))}
-        </ul>
-
-        <h3>Features</h3>
-        <ul>
-          {projects[currentIndex].details.features.map((feature, i) => (
-            <li key={i}>{feature}</li>
-          ))}
-        </ul>
-
-        {projects[currentIndex].details.additionalInfo?.projectSummary && (
-          <div className="project-summary">
-            <h3>Project Summary</h3>
-            <p><strong>Company Name:</strong> {projects[currentIndex].details.additionalInfo.projectSummary.companyName}</p>
-            <p><strong>About the Company:</strong> {projects[currentIndex].details.additionalInfo.projectSummary.aboutCompany}</p>
-            <p><strong>About the Project:</strong> {projects[currentIndex].details.additionalInfo.projectSummary.aboutProject}</p>
-          </div>
-        )}
-
-        {projects[currentIndex].details.additionalInfo?.projectPlan && (
-          <div className="project-plan">
-            <h3>Project Plan</h3>
-            <p><strong>Objective:</strong> {projects[currentIndex].details.additionalInfo.projectPlan.objective}</p>
-            <h4>Corporate Goals</h4>
-            <ul>
-              {projects[currentIndex].details.additionalInfo.projectPlan.corporateGoals.map((goal, i) => (
-                <li key={i}>{goal}</li>
-              ))}
-            </ul>
-            <h4>Scope</h4>
-            <h5>In Scope</h5>
-            <ul>
-              {projects[currentIndex].details.additionalInfo.projectPlan.scope.inScope.map((item, i) => (
-                <li key={i}>{item}</li>
-              ))}
-            </ul>
-            <h5>Out of Scope</h5>
-            <ul>
-              {projects[currentIndex].details.additionalInfo.projectPlan.scope.outOfScope.map((item, i) => (
-                <li key={i}>{item}</li>
-              ))}
-            </ul>
-            <h4>Deliverables</h4>
-            <ul>
-              {projects[currentIndex].details.additionalInfo.projectPlan.deliverables.map((deliverable, i) => (
-                <li key={i}>{deliverable}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {projects[currentIndex].details.additionalInfo?.requirementsAnalysisAndDesign && (
-          <div className="requirements-analysis">
-            <h3>Requirements, Analysis & Design</h3>
-            <p><strong>Purpose:</strong> {projects[currentIndex].details.additionalInfo.requirementsAnalysisAndDesign.purpose}</p>
-            <p><strong>System Overview:</strong> {projects[currentIndex].details.additionalInfo.requirementsAnalysisAndDesign.systemOverview}</p>
-            
-            <h4>Functional Requirements</h4>
-            <ul>
-              {projects[currentIndex].details.additionalInfo.requirementsAnalysisAndDesign.functionalRequirements.map((req, i) => (
-                <li key={i}><strong>{req.id}:</strong> {req.description}</li>
-              ))}
-            </ul>
-
-            <h4>Non-Functional Requirements</h4>
-            <ul>
-              <li><strong>Performance:</strong> {projects[currentIndex].details.additionalInfo.requirementsAnalysisAndDesign.nonFunctionalRequirements.performance}</li>
-              <li><strong>Reliability:</strong> {projects[currentIndex].details.additionalInfo.requirementsAnalysisAndDesign.nonFunctionalRequirements.reliability}</li>
-              <li><strong>Security:</strong> {projects[currentIndex].details.additionalInfo.requirementsAnalysisAndDesign.nonFunctionalRequirements.security}</li>
-              <li><strong>Scalability:</strong> {projects[currentIndex].details.additionalInfo.requirementsAnalysisAndDesign.nonFunctionalRequirements.scalability}</li>
-            </ul>
-
-            {projects[currentIndex].details.additionalInfo.requirementsAnalysisAndDesign.processModeling.map((process, i) => (
-              <div key={i}>
-                <h4>Process Modeling</h4>
-                <h5>{process.name}</h5>
+              <div className="modal-details">
+                <h3>Tech Stack</h3>
                 <ul>
-                  {process.steps.map((step, index) => (
-                    <li key={index}>{step}</li>
+                  {projects[currentIndex].details.techStack.map((tech, i) => (
+                    <li key={i}>{tech}</li>
+                  ))}
+                </ul>
+
+                <h3>Features</h3>
+                <ul>
+                  {projects[currentIndex].details.features.map((feature, i) => (
+                    <li key={i}>{feature}</li>
+                  ))}
+                </ul>
+
+            {projects[currentIndex].details.additionalInfo?.projectSummary && (
+              <div className="project-summary">
+                <h3>Project Summary</h3>
+                <p><strong>Company Name:</strong> {projects[currentIndex].details.additionalInfo.projectSummary.companyName}</p>
+                <p><strong>About the Company:</strong> {projects[currentIndex].details.additionalInfo.projectSummary.aboutCompany}</p>
+                <p><strong>About the Project:</strong> {projects[currentIndex].details.additionalInfo.projectSummary.aboutProject}</p>
+              </div>
+            )}
+
+            {projects[currentIndex].details.additionalInfo?.projectPlan && (
+              <div className="project-plan">
+                <h3>Project Plan</h3>
+                <p><strong>Objective:</strong> {projects[currentIndex].details.additionalInfo.projectPlan.objective}</p>
+                <h4>Corporate Goals</h4>
+                <ul>
+                  {projects[currentIndex].details.additionalInfo.projectPlan.corporateGoals.map((goal, i) => (
+                    <li key={i}>{goal}</li>
+                  ))}
+                </ul>
+                <h4>Scope</h4>
+                <h5>In Scope</h5>
+                <ul>
+                  {projects[currentIndex].details.additionalInfo.projectPlan.scope.inScope.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ul>
+                <h5>Out of Scope</h5>
+                <ul>
+                  {projects[currentIndex].details.additionalInfo.projectPlan.scope.outOfScope.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ul>
+                <h4>Deliverables</h4>
+                <ul>
+                  {projects[currentIndex].details.additionalInfo.projectPlan.deliverables.map((deliverable, i) => (
+                    <li key={i}>{deliverable}</li>
                   ))}
                 </ul>
               </div>
-            ))}
-          </div>
-        )}
+            )}
+
+            {projects[currentIndex].details.additionalInfo?.requirementsAnalysisAndDesign && (
+              <div className="requirements-analysis">
+                <h3>Requirements, Analysis & Design</h3>
+                <p><strong>Purpose:</strong> {projects[currentIndex].details.additionalInfo.requirementsAnalysisAndDesign.purpose}</p>
+                <p><strong>System Overview:</strong> {projects[currentIndex].details.additionalInfo.requirementsAnalysisAndDesign.systemOverview}</p>
+                
+                <h4>Functional Requirements</h4>
+                <ul>
+                  {projects[currentIndex].details.additionalInfo.requirementsAnalysisAndDesign.functionalRequirements.map((req, i) => (
+                    <li key={i}><strong>{req.id}:</strong> {req.description}</li>
+                  ))}
+                </ul>
+
+                <h4>Non-Functional Requirements</h4>
+                <ul>
+                  <li><strong>Performance:</strong> {projects[currentIndex].details.additionalInfo.requirementsAnalysisAndDesign.nonFunctionalRequirements.performance}</li>
+                  <li><strong>Reliability:</strong> {projects[currentIndex].details.additionalInfo.requirementsAnalysisAndDesign.nonFunctionalRequirements.reliability}</li>
+                  <li><strong>Security:</strong> {projects[currentIndex].details.additionalInfo.requirementsAnalysisAndDesign.nonFunctionalRequirements.security}</li>
+                  <li><strong>Scalability:</strong> {projects[currentIndex].details.additionalInfo.requirementsAnalysisAndDesign.nonFunctionalRequirements.scalability}</li>
+                </ul>
+
+                {projects[currentIndex].details.additionalInfo.requirementsAnalysisAndDesign.processModeling.map((process, i) => (
+                  <div key={i}>
+                    <h4>Process Modeling</h4>
+                    <h5>{process.name}</h5>
+                    <ul>
+                      {process.steps.map((step, index) => (
+                        <li key={index}>{step}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
       </div>
     </div>
   </motion.div>
