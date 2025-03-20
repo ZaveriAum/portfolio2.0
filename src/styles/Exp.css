@@ -148,19 +148,29 @@
   }
 
   .col-lg-6 {
-    flex: 0 0 100%;
+    flex: 100%;
     max-width: 100%;
   }
 
   .exp-border-left,
   .exp-border-right {
     border: none;
-    border-top: 2px solid rgba(255, 255, 255, 0.2);
   }
 
   .exp-box {
-    flex-direction: column;
     margin-bottom: 15px;
+  }
+
+  .exp-title, .exp-company, .exp-details, .exp-duration{
+    font-size: 0.9rem;
+  }
+
+  .exp-details-list li{
+    font-size: 0.8rem;
+  }
+
+  .exp-header{
+    font-size: 1.1prem;
   }
 }
 
@@ -172,6 +182,41 @@
   .exp-company {
     font-size: clamp(12px, 1.8vw, 16px);
   }
+
+  .exp-title, .exp-company, .exp-details, .exp-duration{
+    font-size: 0.9rem;
+  }
+
+  .exp-details-list li{
+    font-size: 0.7rem;
+  }
+
+  .exp-header{
+    font-size: 1prem;
+  }
+}
+
+@media (max-width: 630px) {
+  .exp-title {
+    font-size: clamp(14px, 2vw, 18px);
+  }
+
+  .exp-company {
+    font-size: clamp(12px, 1.8vw, 16px);
+  }
+
+  .exp-title, .exp-company, .exp-details, .exp-duration{
+    font-size: 0.8rem;
+  }
+
+  .exp-details-list li{
+    font-size: 0.6rem;
+  }
+
+  .exp-header{
+    font-size: 0.8prem;
+  }
+
 }
 
 @media (max-width: 480px) {
@@ -193,6 +238,86 @@
 
   .exp-box {
     margin-bottom: 10px;
+  }
+
+  .exp-title, .exp-company, .exp-details, .exp-duration{
+    font-size: 0.7rem;
+  }
+
+  .exp-details-list li{
+    font-size: 0.5rem;
+  }
+
+  .exp-header{
+    font-size: 0.9prem;
+  }
+}
+
+@media (max-width: 315px) {
+  .exp-header {
+    font-size: clamp(20px, 3.5vw, 30px);
+    padding-bottom: 10px;
+  }
+
+  .exp-title {
+    font-size: 14px; 
+  }
+
+  .exp-company,
+  .exp-details,
+  .exp-duration,
+  .exp-details-list li {
+    font-size: 12px;
+  }
+
+  .exp-box {
+    margin-bottom: 10px;
+  }
+
+  .exp-title, .exp-company, .exp-details, .exp-duration{
+    font-size: 0.5rem;
+  }
+
+  .exp-details-list li{
+    font-size: 0.4rem;
+  }
+
+  .exp-header{
+    font-size: 0.7prem;
+  }
+}
+
+@media (max-width: 236px) {
+  .exp-header {
+    font-size: clamp(20px, 3.5vw, 30px);
+    padding-bottom: 10px;
+  }
+
+  .exp-title {
+    font-size: 14px; 
+  }
+
+  .exp-company,
+  .exp-details,
+  .exp-duration,
+  .exp-details-list li {
+    font-size: 12px;
+  }
+
+  .exp-box {
+    margin-bottom: 10px;
+  }
+
+  .exp-title, .exp-company, .exp-details, .exp-duration{
+    font-size: 0.4rem;
+  }
+
+  .exp-details-list li{
+    font-size: 0.3rem;
+  }
+
+  .exp-header{
+    font-size: 0.6prem;
   }
 }
 
