@@ -83,14 +83,17 @@ export default function Carousel() {
     const element = carouselRef.current;
 
     const handleTouchStart = (e) => {
+      if (isModalOpen) return;
       touchStartY.current = e.touches[0].clientY;
     };
 
     const handleTouchMove = (e) => {
+      if (isModalOpen) return;
       e.preventDefault();
     };
 
     const handleTouchEnd = (e) => {
+      if (isModalOpen) return;
       touchEndY.current = e.changedTouches[0].clientY;
       const swipeDistance = touchEndY.current - touchStartY.current;
 
@@ -157,6 +160,8 @@ export default function Carousel() {
 
   useEffect(() => {
     const handleKeyDown = (event) => {
+      if (isModalOpen) return;
+
       const now = Date.now();
       if (now - lastScrollTime.current < 800) return;
 
