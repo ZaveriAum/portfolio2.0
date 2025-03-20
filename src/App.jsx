@@ -15,12 +15,17 @@ import sendIcon from './assets/send-icon.svg';
 import closeIcon from './assets/close-icon.svg';
 import emailjs from '@emailjs/browser';
 import menuIcon from './assets/menu-icon.svg';
+import githubIcon from './assets/github-icon.svg';
+import { title } from "framer-motion/client";
+import linkedinIcon from './assets/linkedin-icon.svg';
 
 const pages = [
   { component: Home, title: "Home", icon: homeIcon },
   { component: About, title: "About", icon: aboutMeIcon },
   { component: Work, title: "Projects", icon: projectsIcon },
   { component: Exp, title: "Experience", icon: expIcon },
+  { redirect : "https://github.com/ZaveriAum", title: "Github", icon: githubIcon},
+  { redirect : "https://www.linkedin.com/in/aumzaveri/", title: "LinkedIn", icon: linkedinIcon}
 ];
 
 export default function Carousel() {
@@ -169,10 +174,19 @@ export default function Carousel() {
 
   const changePage = (direction) => {
     const newIndex = (index + direction + pages.length) % pages.length;
+    if (pages[newIndex].redirect){
+      console.log("here")
+      window.open(pages[newIndex].redirect, "_blank");
+      return ;
+    }
     setIndex(newIndex);
   };
 
   const goToPage = (pageIndex) => {
+    if (pages[pageIndex].redirect){
+      window.open(pages[pageIndex].redirect, "_blank");
+      return ;
+    }
     setIndex(pageIndex);
     setIsNavOpen(false);
   };
@@ -200,7 +214,6 @@ export default function Carousel() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
-            className="absolute w-full h-full"
           >
             <CurrentPage />
           </motion.div>

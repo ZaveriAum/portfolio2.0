@@ -171,8 +171,8 @@
   align-items: center;
   flex-direction: column;
   position: fixed;
-  left: 50px;
-  bottom: 30%;
+  left: 25px;
+  bottom: 22%;
   transform: translateX(-50%);
   gap: clamp(10px, 3vw, 50px);
   z-index: 10;
@@ -274,15 +274,18 @@
 @media (max-width: 768px) {
   .sayhi-container {
     width: clamp(180px, 90vw, 280px);
+    flex-wrap: wrap;
   }
 
   .sayhi-form {
-    flex-direction: column;
     align-items: stretch;
   }
 
   .say-hi-input {
-    width: 100%;
+    align-self: flex-start;
+    justify-self: flex-end;
+    width: 70%;
+    height: 100%;
   }
 
   .sayhi-modal-button.send-btn {
@@ -293,6 +296,11 @@
 @media (max-width: 480px) {
   .sayhi-header p {
     font-size: clamp(12px, 4vw, 16px);
+  }
+
+  .sayhi-container {
+    width: 40%;
+    flex-wrap: wrap;
   }
 
   .navigation-dots {
