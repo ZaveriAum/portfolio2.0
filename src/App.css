@@ -172,7 +172,7 @@
   flex-direction: column;
   position: fixed;
   left: 25px;
-  bottom: 22%;
+  bottom: 15%;
   transform: translateX(-50%);
   gap: clamp(10px, 3vw, 50px);
   z-index: 10;
