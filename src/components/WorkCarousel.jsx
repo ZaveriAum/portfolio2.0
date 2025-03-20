@@ -260,7 +260,9 @@ const WorkCarousel = ({ isModalOpen, setIsModalOpen }) => {
                 {projects[currentIndex].hasMobile ? (
                   <div className="dual-images">
                     <img src={projects[currentIndex].webImage} alt="Web version" className="web-img" />
+                    {window.screen.width >= 865 && 
                     <img src={projects[currentIndex].mobileImage} alt="Mobile version" className="mobile-img" />
+                    }
                   </div>
                 ) : (
                   <img src={projects[currentIndex].webImage} alt={projects[currentIndex].title} className="single-img" />
@@ -268,7 +270,9 @@ const WorkCarousel = ({ isModalOpen, setIsModalOpen }) => {
               </motion.div>
               <div className="project-info">
                 <h2>{projects[currentIndex].title}</h2>
-                <p>{projects[currentIndex].description}</p>
+                {window.screen.height >= 675 && 
+                  <p>{projects[currentIndex].description}</p>
+                }
               </div>
             </motion.div>
           </AnimatePresence>
@@ -280,7 +284,10 @@ const WorkCarousel = ({ isModalOpen, setIsModalOpen }) => {
           <motion.button
             key={idx}
             className={`dot ${idx === currentIndex ? 'active' : ''}`}
-            onClick={() => handleDotClick(idx)}
+            onClick={() => {
+              setDirection(idx > currentIndex ? 1 : -1);
+              setCurrentIndex(idx);
+            }}
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.9 }}
           />

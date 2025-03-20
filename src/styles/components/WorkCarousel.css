@@ -148,7 +148,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 5000;
+  z-index: 6000;
   overflow: hidden;
 }
 
@@ -269,5 +269,11 @@
 
   .modal-content {
     max-height: 80vh;
+  }
+}
+
+@media (max-height: 595px) {
+  .project-card{
+    height: 60vh;
   }
 }
